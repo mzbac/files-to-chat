@@ -19,7 +19,7 @@ To install and use `files-to-chat`, you have two options:
 
 2. **From Source**:
    ```sh
-   git clone https://github.com/your-repo/files-to-chat.git
+   git clone https://github.com/mzbac/files-to-chat.git
    cd files-to-chat
    pip install .
    ```
