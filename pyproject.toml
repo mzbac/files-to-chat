@@ -1,0 +1,21 @@
+[project]
+name = "files-to-chat"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "anchen", email = "li.anchen.au@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "docling>=2.18.0",
+    "mlx>=0.22.0",
+    "mlx-lm>=0.21.1",
+]
+
+[project.scripts]
+files-to-chat = "files_to_chat:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
