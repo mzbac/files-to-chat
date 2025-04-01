@@ -5,7 +5,7 @@ from docling.datamodel.pipeline_options import PdfPipelineOptions
 from docling.datamodel.base_models import InputFormat
 from docling.document_converter import PdfFormatOption, WordFormatOption
 from docling.pipeline.simple_pipeline import SimplePipeline
-
+from docling.exceptions import ConversionError 
 
 def convert_files_in_folder(
     folder_path, ignore_pattern="", include_hidden=False, extensions=[]
@@ -20,15 +20,8 @@ def convert_files_in_folder(
                 continue
             if not include_hidden and filename.startswith("."):
                 continue
-            try:
-                results.append(convert_file_to_markdown(filepath))
-            except Exception as e:
-                try:
-                    with open(filepath, "r") as f:
-                        content = f.read()
-                    results.append({"path": filepath, "content": content})
-                except Exception as e:
-                    print(f"Error processing file {filepath}: {e}")
+            results.append(convert_file_to_markdown(filepath))
+  
     return results
 
 
@@ -51,9 +44,16 @@ def convert_file_to_markdown(filepath):
             ),
         },
     )
-    conv_result = doc_converter.convert(filepath)
-    content = conv_result.document.export_to_markdown()
-    return {"path": filepath, "content": content}
+    
+    try:
+        conv_result = doc_converter.convert(filepath)
+        content = conv_result.document.export_to_markdown()
+        return {"path": filepath, "content": content}
+    except ConversionError as e:
+        print(f"[INFO] Falling back to plain text for unsupported format: {filepath}")
+        with open(filepath, "r") as f:
+            content = f.read()
+        return {"path": filepath, "content": content}
 
 
 def print_as_xml(path, content):
