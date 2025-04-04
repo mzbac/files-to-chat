@@ -6,7 +6,8 @@ from pathlib import Path
 from .prompt_cache import create_prompt_cache
 
 from .docs import convert_file_to_markdown, convert_files_in_folder, print_as_xml
-from mlx_lm.utils import stream_generate, load
+from mlx_lm.utils import load
+from mlx_lm.generate import stream_generate
 from mlx_lm.sample_utils import make_sampler
 from mlx_lm.models.cache import load_prompt_cache
 

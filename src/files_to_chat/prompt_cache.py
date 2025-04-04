@@ -5,7 +5,8 @@ import time
 import mlx.core as mx
 
 from mlx_lm.models.cache import make_prompt_cache, save_prompt_cache
-from mlx_lm.utils import generate_step, load
+from mlx_lm.utils import load
+from mlx_lm.generate import generate_step
 
 
 def create_prompt_cache(model_path: str, prompt: str, cache_path: str):
