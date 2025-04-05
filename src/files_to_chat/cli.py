@@ -69,6 +69,12 @@ def setup_arg_parser():
         default=False,
         help="Force re-creating prompt cache even if it exists",
     )
+    parser.add_argument(
+        "--output-file",
+        "-o",
+        type=str,
+        help="Path to output processed documents to a single file instead of creating a prompt cache",
+    )
     return parser
 
 
@@ -76,6 +82,37 @@ def cli():
     args = setup_arg_parser().parse_args()
     args.path = os.path.abspath(args.path)
 
+    # Process documents regardless of output mode
+    if args.path:
+        if os.path.isdir(args.path):
+            print(
+                f"[INFO] Converting all files in folder: {args.path} and formatting documents"
+            )
+            docs = convert_files_in_folder(
+                args.path, args.ignore_pattern, args.include_hidden, args.extensions
+            )
+        else:
+            print(f"[INFO] Converting file: {args.path} and formatting document")
+            docs = [convert_file_to_markdown(args.path)]
+
+    # Format documents for output
+    formatted_docs = ["<documents>"]
+    for doc in docs:
+        formatted_docs.append(print_as_xml(doc["path"], doc["content"]))
+    formatted_docs.append("</documents>")
+    formatted_content = "\n".join(formatted_docs)
+
+    # If output file specified, write documents to file and exit
+    if args.output_file:
+        output_path = os.path.abspath(args.output_file)
+        print(f"[INFO] Writing processed documents to {output_path}")
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        with open(output_path, "w") as f:
+            f.write(formatted_content)
+        print(f"[INFO] Documents successfully written to {output_path}")
+        return
+
+    # Otherwise continue with prompt cache and chat functionality
     abs_name = args.path.replace(os.sep, "_")
     model_path = args.model.replace(os.sep, "_")
     cache_name = f"{model_path}{abs_name}.safetensors"
@@ -87,26 +124,9 @@ def cli():
     cache_path = os.path.join(cache_dir, cache_name)
     prompt_cache, model, tokenizer = None, None, None
     if args.force or not os.path.exists(cache_path):
-        if args.path:
-            if os.path.isdir(args.path):
-                print(
-                    f"[INFO] Converting all files in folder: {args.path} and formatting documents"
-                )
-                docs = convert_files_in_folder(
-                    args.path, args.ignore_pattern, args.include_hidden, args.extensions
-                )
-            else:
-                print(f"[INFO] Converting file: {args.path} and formatting document")
-                docs = [convert_file_to_markdown(args.path)]
-
-        prompt = ["<documents>"]
-        for doc in docs:
-            prompt.append(print_as_xml(doc["path"], doc["content"]))
-        prompt.append("</documents>")
-        prompt = "\n".join(prompt)
         print(f"[INFO] Creating prompt cache for {args.model} in {cache_path}")
         prompt_cache, model, tokenizer = create_prompt_cache(
-            args.model, prompt, cache_path
+            args.model, formatted_content, cache_path
         )
     else:
         print(f"[INFO] Loading prompt cache from {cache_path}")

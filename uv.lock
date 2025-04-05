@@ -289,7 +289,7 @@ wheels = [
 
 [[package]]
 name = "files-to-chat"
-version = "0.1.2"
+version = "0.1.3"
 source = { editable = "." }
 dependencies = [
     { name = "docling" },
@@ -588,10 +588,13 @@ name = "mlx"
 version = "0.24.2"
 source = { registry = "https://pypi.org/simple" }
 wheels = [
+    { url = "https://files.pythonhosted.org/packages/46/97/32f71a98a13ec61b991e4465fe33bee2e581d09ae74a1389f35246aa1381/mlx-0.24.2-cp311-cp311-macosx_13_0_arm64.whl", hash = "sha256:9c2ac87d993cfbaaba124e1bb67448cb91de912b7c0224997c7086ae4b13ca3e", size = 28207870 },
     { url = "https://files.pythonhosted.org/packages/56/34/f358678df9c43499277b25e2be8fd51138e55c3eaf0f5698442035420132/mlx-0.24.2-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:ecfdd587612f00c58fe618c5c8c49c9ab9de58f7cc533f38995177fa8ed1daaa", size = 27874433 },
     { url = "https://files.pythonhosted.org/packages/ee/1c/6080356fd278636cecef289e030040c717973eee3d0de32247acccecf979/mlx-0.24.2-cp311-cp311-macosx_15_0_arm64.whl", hash = "sha256:a4af06b05e548b444869affeceb367da65d5fde65d5d07b52da6289eeee0ff74", size = 27607904 },
+    { url = "https://files.pythonhosted.org/packages/20/f7/a8153d0c37f5c85d9c1c21b8c387312197b7452beef2565559cb3a34cc00/mlx-0.24.2-cp312-cp312-macosx_13_0_arm64.whl", hash = "sha256:3a855809e06becb76ff225dbdea72bed7c8f68dd91d9fa27b8afa8cf949872c6", size = 28207687 },
     { url = "https://files.pythonhosted.org/packages/03/d0/c356b63ce257ffb6e5a0f04d44e694bdaebe9676ceb1c3b14eaa0da55299/mlx-0.24.2-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:4a5d97a8bde8eaab5d889262be0734234921d4e24c5ab309a74a2d676bb3fb6f", size = 27676214 },
     { url = "https://files.pythonhosted.org/packages/b1/e3/4be8e60c87a600beec401931f2da71f9ba8acf0a86de78ff9697696ff988/mlx-0.24.2-cp312-cp312-macosx_15_0_arm64.whl", hash = "sha256:225c876c9335127e3ddbd3feac926c5bb3cbfe5e6503535c80aecebc6d6d7859", size = 27608281 },
+    { url = "https://files.pythonhosted.org/packages/20/21/6676f287859b18e794a3db262a7c2e71b3bf06d7a067408cbc5e93eee0aa/mlx-0.24.2-cp313-cp313-macosx_13_0_arm64.whl", hash = "sha256:1359bae501e4afd378e921d99db1f8307de9084b34eefb1ade2dfef27b92755a", size = 28207629 },
     { url = "https://files.pythonhosted.org/packages/65/ee/868694c2c73b361e5744385b1cb4ec1425296a62daa6e7828a3ccd1336da/mlx-0.24.2-cp313-cp313-macosx_14_0_arm64.whl", hash = "sha256:9507725ec550d4a3efcace1143d4333133820a84b0190fddd8dbe0a34cbab967", size = 27874837 },
     { url = "https://files.pythonhosted.org/packages/b6/63/729596bb5eea4d0bcee3abb3c911467c8165a675ac273deaeac0413b584e/mlx-0.24.2-cp313-cp313-macosx_15_0_arm64.whl", hash = "sha256:67a5fc246bbde8fb11ca1523e5c6e8143c12efaa561b5820f45af359bf1c5669", size = 27608290 },
 ]
